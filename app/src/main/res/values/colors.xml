@@ -3,9 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
-    <color name="PinkDepth1">#FFADA6</color>
-    <color name="PinkDepth2">#F4A59E</color>
+    <!--F8B19F-->
+    <color name="PinkDepth1">#F8B19F</color>
+    <color name="PinkDepth2">#F1989C</color>
     <color name="PinkDepth3">#E36B98</color>
     <color name="PinkDepth4">#C1498E</color>
     <color name="PinkDepth5">#91377C</color>

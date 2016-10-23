@@ -22,10 +22,6 @@ import java.util.Random;
  */
 
 public class AmzWaveView extends View {
-    public Path getPath() {
-        return path;
-    }
-
     public void setPath(Path path) {
         this.path = path;
         invalidate();
@@ -172,7 +168,7 @@ public class AmzWaveView extends View {
 //                float waveHeight = (float) (getMeasuredHeight() / 5 + currentValueY * randomAmplitude);
 //                if (previousValueY - currentValueY < 0 && previousValueY < 0 && previousValueY > -0.01)
 //                    randomAmplitude = (float) Math.random() * mAmplitude;
-                previousValueY = currentValueY;
+//                previousValueY = currentValueY;
 //                System.out.println(Math.random());
 
 //                float waveHeight = (float) (getMeasuredHeight() / 5 + currentValueY* mAmplitude);
@@ -192,8 +188,8 @@ public class AmzWaveView extends View {
 //                        *(1+level/5);
                 canvas.drawLine(BeginX, BeginY - 100, BeginX, BeginY + waveHeight, mPaint[level]);
             }
-            canvas.drawPath(path,Pen1);
         }
+        canvas.drawPath(path,Pen1);
 
 //        canvas.drawLine(0,0,0,500,bezierLayer1);
 //        Path bezierPath1 = new Path();
