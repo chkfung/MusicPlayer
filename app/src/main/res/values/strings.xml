@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Amz_musicplayer</string>
+    <string name="timeFormat" translatable="false"> %d:%02d </string>
 </resources>

@@ -18,30 +18,16 @@ import java.util.Random;
  */
 
 public class mWaveView extends View {
-    
+
     private static final Handler mHandler = new Handler();
     private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
-               invalidate();
+            invalidate();
         }
     };
     private static final int BubbleSize = 30;
-    Random rand = new Random();
-
-    private byte[] animatedY;
-
-    public byte[] getAnimatedY() {
-        return animatedY;
-    }
-
-    public void setAnimatedY(byte[] animatedY) {
-        this.animatedY = animatedY;
-        invalidate();
-//        postInvalidateDelayed(2000);
-    }
-
-    List<Float> amp = new ArrayList<Float>();
+    private static boolean AnimStatus = true;
     Paint[] mPaint;
     Paint[] CirclePaint;
     Bubble[] BubbleArray1;
@@ -53,6 +39,7 @@ public class mWaveView extends View {
     Wave wave2;
     Wave wave3;
     Wave wave4;
+
     public mWaveView(Context context) {
         super(context);
         init();
@@ -72,40 +59,45 @@ public class mWaveView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int mStartY = getHeight() / mPaint.length;
-
-//        for (int i = 0; i < mPaint.length; i++) {
-//            for (int j = 0; j < getWidth(); j++) {
-//                byte amplitude = 0;
-//                if (animatedY != null)
-//                    amplitude = animatedY[j];
-////                float amplitude = -(float) (Math.sin(0.01 * j) + Math.sin(0.02 * j)) * 50 - 140;
-//                canvas.drawLine(j, mStartY * i + amplitude - 100, j + 1, mStartY * (i + 1), mPaint[i]);
-//            }
-//
-//        }
+        canvas.drawRect(0, 0, getWidth(), getHeight() / 5, mPaint[0]);
         wave1.draw(canvas);
         wave2.draw(canvas);
         wave3.draw(canvas);
         wave4.draw(canvas);
-        for (int i = 0; i < BubbleArray1.length; i++) {
+        canvas.drawRect(0, 4 * getHeight() / 5, getWidth(), getHeight(), CirclePaint[3]);
+        for (int i = 0; i < BubbleSize; i++) {
             BubbleArray1[i].draw(canvas);
-        }
-        for (int i = 0; i < BubbleArray2.length; i++) {
             BubbleArray2[i].draw(canvas);
-        }
-        for (int i = 0; i < BubbleArray3.length; i++) {
             BubbleArray3[i].draw(canvas);
-        }
-        for (int i = 0; i < BubbleArray4.length; i++) {
             BubbleArray4[i].draw(canvas);
         }
-        mHandler.postDelayed(runnable,15);
+        if (AnimStatus)
+            mHandler.postDelayed(runnable, 15);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    public void StopAnim() {
+        AnimStatus = false;
+        if (!AnimStatus ) {
+            wave1.stopAnim();
+            wave2.stopAnim();
+            wave3.stopAnim();
+            wave4.stopAnim();
+            for (int i = 0; i < BubbleSize; i++) {
+                BubbleArray1[i].reset();
+                BubbleArray2[i].reset();
+                BubbleArray3[i].reset();
+                BubbleArray4[i].reset();
+            }
+        }
+    }
+    public void ResumeAnim(){
+        AnimStatus = true;
+        invalidate();
     }
 
     private void init() {
@@ -124,26 +116,21 @@ public class mWaveView extends View {
 
         CirclePaint = new Paint[]{mCircle2, mCircle3, mCircle4, mCircle5};
 
-        wave1 = Wave.create(mLayer2,mCircle2,1024,300);
-        wave2 = Wave.create(mLayer3,mCircle3,1024,600);
-        wave3 = Wave.create(mLayer4,mCircle4,1024,900);
-        wave4 = Wave.create(mLayer5,mCircle5,1024,1200);
+        wave1 = Wave.create(mLayer2, mCircle2, 1);
+        wave2 = Wave.create(mLayer3, mCircle3, 2);
+        wave3 = Wave.create(mLayer4, mCircle4, 3);
+        wave4 = Wave.create(mLayer5, mCircle5, 4);
 
         BubbleArray1 = new Bubble[BubbleSize];
-        for (int i = 0; i < BubbleArray1.length; i++) {
-            BubbleArray1[i] = Bubble.create(mCircle2, 1024, 300);
-        }
         BubbleArray2 = new Bubble[BubbleSize];
-        for (int i = 0; i < BubbleArray1.length; i++) {
-            BubbleArray2[i] = Bubble.create(mCircle3, 1024, 600);
-        }
         BubbleArray3 = new Bubble[BubbleSize];
-        for (int i = 0; i < BubbleArray1.length; i++) {
-            BubbleArray3[i] = Bubble.create(mCircle4, 1024, 900);
-        }
         BubbleArray4 = new Bubble[BubbleSize];
-        for (int i = 0; i < BubbleArray1.length; i++) {
-            BubbleArray4[i] = Bubble.create(mCircle5, 1024, 1200);
+
+        for (int i = 0; i < BubbleSize; i++) {
+            BubbleArray1[i] = Bubble.create(mCircle2, 1);
+            BubbleArray2[i] = Bubble.create(mCircle3, 2);
+            BubbleArray3[i] = Bubble.create(mCircle4, 3);
+            BubbleArray4[i] = Bubble.create(mCircle5, 4);
         }
     }
 
@@ -165,5 +152,21 @@ public class mWaveView extends View {
         mCirclePainter.setStyle(Paint.Style.FILL);
         mCirclePainter.setColor(mColor);
         return mCirclePainter;
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        int heightPortion = h / 5;
+        wave1.init(w, heightPortion);
+        wave2.init(w, heightPortion);
+        wave3.init(w, heightPortion);
+        wave4.init(w, heightPortion);
+        for (int i = 0; i < BubbleSize; i++) {
+            BubbleArray1[i].init(w, heightPortion);
+            BubbleArray2[i].init(w, heightPortion);
+            BubbleArray3[i].init(w, heightPortion);
+            BubbleArray4[i].init(w, heightPortion);
+        }
     }
 }

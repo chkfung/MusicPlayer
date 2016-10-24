@@ -1,11 +1,8 @@
 package me.chkfung.amz_musicplayer;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.util.AttributeSet;
-import android.view.View;
 
 import java.util.Random;
 
@@ -15,40 +12,50 @@ import java.util.Random;
 
 public class Bubble {
 
+    private int YPos = 0;
+    private final int SPEED = 10;
     private final Random random;
     private final Paint paint;
-    private final Point position;
+    private Point position;
     private final int radius;
-    private final int width;
-    private final int height;
-    private static final int HeightRange = 200;
-    public static Bubble create(Paint paint, int width, int height) {
+    private int width;
+    private final int sequence;
+    private int HeightRange;
+
+    public static Bubble create(Paint paint, int sequence) {
         Random random = new Random();
-        return new Bubble(random, paint, width, height);
+        return new Bubble(random, paint, sequence);
     }
 
-    Bubble(Random random, Paint paint, int width, int height) {
-        this.height = height;
-        this.width = width;
+    Bubble(Random random, Paint paint, int sequence) {
+        this.sequence = sequence;
         this.random = random;
         this.paint = paint;
-        this.position = new Point(random.nextInt(width), height + random.nextInt(HeightRange));
-        this.radius = random.nextInt(10)+5;
+        this.radius = random.nextInt(10) + 5;
+    }
+
+    public void init(int width, int YPos) {
+        HeightRange = YPos/2;
+        this.YPos = YPos ;
+        this.width = width;
+        this.position = new Point(random.nextInt(width), this.YPos*sequence + random.nextInt(HeightRange));
     }
 
     private void move() {
-        position.y -=5;
+        position.y -= random.nextInt(5)+3;
     }
 
     public void draw(Canvas canvas) {
         move();
-        if(position.y <= height- HeightRange)
+        if (position.y <= YPos *(sequence-1))
             reset();
-        canvas.drawCircle(position.x,position.y,radius,paint);
+        canvas.drawCircle(position.x, position.y, radius, paint);
     }
-    public void reset(){
-        position.y=height + random.nextInt(HeightRange);
+
+    public void reset() {
+        position.y = YPos*sequence + random.nextInt(HeightRange);
         position.x = random.nextInt(width);
     }
+
 }
 
