@@ -9,3 +9,4 @@ Thus, I decided to write an implementation with Android Canvas.
 ##Animation Preview
 ![gif](Screenshot/player.gif)
 ![mygif](Screenshot/myplayer.gif)
+![mygif2](Screenshot/myplayer2.gif)
