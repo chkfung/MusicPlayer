@@ -8,24 +8,18 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
 import android.os.Handler;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.CycleInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import me.chkfung.amz_musicplayer.widget.DiskPanel;
+import me.chkfung.amz_musicplayer.widget.WaveSurfaceView;
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
@@ -55,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initMusic4() {
-        final mWaveView waveView = (mWaveView) findViewById(R.id.WaveView);
+//        final mWaveView waveView = (mWaveView) findViewById(R.id.WaveView);
+        final WaveSurfaceView waveView = (WaveSurfaceView) findViewById(R.id.WaveView);
         final DiskPanel diskPanel = (DiskPanel) findViewById(R.id.diskPanel);
         txt_Curr = (TextView) findViewById(R.id.txt_current);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);

@@ -1,4 +1,4 @@
-package me.chkfung.amz_musicplayer;
+package me.chkfung.amz_musicplayer.widget;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,7 +12,7 @@ import java.util.Random;
 public class Wave {
     private int YPos;
     private int width;
-    private final int INTERVAL = 27;
+    private final int INTERVAL = 45;
     private final Paint paint;
     private final Paint paintRect;
     private final Random rand = new Random();

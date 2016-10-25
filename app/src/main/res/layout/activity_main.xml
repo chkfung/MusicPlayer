@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="me.chkfung.amz_musicplayer.MainActivity">
 
-    <me.chkfung.amz_musicplayer.mWaveView
+    <me.chkfung.amz_musicplayer.widget.WaveSurfaceView
         android:id="@+id/WaveView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -110,7 +110,7 @@
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
-        <me.chkfung.amz_musicplayer.DiskPanel
+        <me.chkfung.amz_musicplayer.widget.DiskPanel
             android:id="@+id/diskPanel"
             android:layout_width="200dp"
             android:layout_height="200dp"

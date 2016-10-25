@@ -1,4 +1,4 @@
-package me.chkfung.amz_musicplayer;
+package me.chkfung.amz_musicplayer.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
+
+import me.chkfung.amz_musicplayer.R;
 
 /**
  * Created by chkfu_000 on 10/24/2016.
@@ -20,7 +22,7 @@ public class DiskPanel extends View {
     int height = 0;
     int radius = 0;
     private final int INNER_PADDING = 40;
-    private final int IMAGE_BORDER_PADDING = 120;
+    private final int IMAGE_BORDER_PADDING = 100;
 
     private int angle = 0;
 

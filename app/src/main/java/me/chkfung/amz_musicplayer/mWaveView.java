@@ -9,9 +9,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import me.chkfung.amz_musicplayer.widget.Bubble;
+import me.chkfung.amz_musicplayer.widget.Wave;
 
 /**
  * Created by chkfu_000 on 10/18/2016.

@@ -1,4 +1,4 @@
-package me.chkfung.amz_musicplayer;
+package me.chkfung.amz_musicplayer.widget;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -13,7 +13,7 @@ import java.util.Random;
 public class Bubble {
 
     private int YPos = 0;
-    private final int SPEED = 10;
+    private final int SPEED = 3;
     private final Random random;
     private final Paint paint;
     private Point position;
@@ -42,7 +42,7 @@ public class Bubble {
     }
 
     private void move() {
-        position.y -= random.nextInt(5)+3;
+        position.y -= random.nextInt(5)+SPEED;
     }
 
     public void draw(Canvas canvas) {
